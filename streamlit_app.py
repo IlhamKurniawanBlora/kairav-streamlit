@@ -1,46 +1,52 @@
 import streamlit as st
-from PIL import Image
+import importlib
+from pathlib import Path
 
-# Load image
-img = Image.open("kairav.png")  # Pastikan gambar "kairav.png" ada di folder proyekmu
+# Inisialisasi posisi slide di dalam session_state
+if 'slide_index' not in st.session_state:
+    st.session_state.slide_index = 0
 
-# Tampilan gambar dan judul
-st.image(img, width=200)
-st.title("Portofolio Ilham Kurniawan")
+# Fungsi untuk menampilkan balon jika berada di slide pertama atau terakhir
+def show_balloons():
+    if st.session_state.slide_index == 0 or st.session_state.slide_index == len(slide_files) - 1:
+        st.balloons()
 
-# Pengenalan
-st.header("Tentang Saya")
-st.write(
-    """
-    Saya Ilham Kurniawan, seorang mahasiswa jurusan Informatika dengan minat kuat pada pengembangan perangkat lunak, khususnya di bidang web development dan data analysis.  
-    Selama beberapa tahun terakhir, saya telah mengasah keterampilan saya dalam bahasa Python dan teknologi terkait untuk menghasilkan solusi yang efisien dan inovatif.
-    """
-)
+# Load CSS file
+css_path = Path("style.css")
+with open(css_path) as f:
+    st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-# Skill dengan logo
-st.header("Skill Saya di Bidang IT")
-col1, col2, col3 = st.columns(3)
+# Daftar nama file slide tanpa ekstensi `.py`
+slide_files = [
+    "slide1", "slide2", "slide3", "slide4", "slide5",
+    "slide6", "slide7", "slide8", "slide9", "slide10"
+]
 
-# Skill 1
+# Fungsi untuk navigasi slide
+def go_previous():
+    st.session_state.slide_index = max(0, st.session_state.slide_index - 1)
+
+def go_next():
+    st.session_state.slide_index = min(len(slide_files) - 1, st.session_state.slide_index + 1)
+
+# Mendapatkan nama file slide saat ini
+current_slide_file = slide_files[st.session_state.slide_index]
+
+# Mengimpor dan menjalankan fungsi render dari file slide menggunakan importlib
+slide_module = importlib.import_module(f"slides.{current_slide_file}")
+slide_module.render()
+
+# Menampilkan balon jika berada di slide 1 atau slide 10
+show_balloons()
+
+# Footer navigasi halaman dan tombol di bagian bawah
+st.write(f"Slide {st.session_state.slide_index + 1} dari {len(slide_files)}")
+
+# Tombol navigasi di bagian bawah
+col1, col2, col3 = st.columns([1, 6, 1])
 with col1:
-    st.image("python-logo.png", width=50)  # Logo Python
-    st.write("Python")
-
-# Skill 2
-with col2:
-    st.image("streamlit-logo.png", width=50)  # Logo Streamlit
-    st.write("Streamlit")
-
-# Skill 3
+    if st.button("Back", key="prev_button"):
+        go_previous()
 with col3:
-    st.image("html-logo.png", width=50)  # Logo HTML
-    st.write("HTML & CSS")
-
-# Contact
-st.header("Kontak")
-st.write(
-    """
-    Jika Anda tertarik untuk bekerja sama atau ingin mengenal lebih lanjut tentang proyek-proyek saya, jangan ragu untuk menghubungi saya!
-    """
-)
-st.write("Email: ilham@example.com")
+    if st.button("Next", key="next_button"):
+        go_next()

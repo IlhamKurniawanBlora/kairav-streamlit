@@ -1,0 +1,78 @@
+.fullscreen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+    padding: 10px;
+    background-color: #f5f5f5;
+}
+
+
+.fullscreen h1 {
+    font-size: 2rem;
+    color: #333;
+    text-align: center;
+}
+
+.fullscreen p {
+    font-size: 1rem;
+    color: #555;
+    margin: 1rem 0;
+    text-align: center;
+}
+
+.fullscreen ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    gap: 15px;
+    justify-content: center;
+}
+
+.fullscreen ul li {
+    background-color: #333;
+    color: #ffffff;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    transition: background-color 0.3s;
+}
+
+.fullscreen ul li:hover {
+    background-color: #555;
+    cursor: pointer;
+}
+
+.fullscreen a {
+    color: #333;
+    text-decoration: none;
+}
+
+.fullscreen a:hover {
+    color: #555;
+    margin-left: 10px;
+}
+.project-link,
+.github-link {
+    color: #4A90E2;
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+}
+
+.project-link:hover,
+.github-link:hover {
+    color: #2C7CC3;
+    border-bottom: 1px solid #2C7CC3;
+}
+
+.project-link::after,
+.github-link::after {
+    content: '↗';
+    padding-left: 5px;
+    font-size: 0.85em;
+    color: #666;
+}
