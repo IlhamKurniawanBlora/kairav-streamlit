@@ -14,7 +14,7 @@ def render():
                     </a>
                 </p>
                 <p>
-                    <a href="https://www.instagram.com/yourusername" target="_blank" style="text-decoration: none; color: black;">
+                    <a href="https://www.instagram.com/ilhamkrnwan__" target="_blank" style="text-decoration: none; color: black;">
                         📷 Instagram
                     </a>
                 </p>
@@ -24,7 +24,7 @@ def render():
                     </a>
                 </p>
                 <p>
-                    <a href="https://github.com/yourusername" target="_blank" style="text-decoration: none; color: black;">
+                    <a href="https://github.com/IlhamKurniawanBlora" target="_blank" style="text-decoration: none; color: black;">
                         🖥️ GitHub
                     </a>
                 </p>
